@@ -16,32 +16,6 @@ public class LeituraDados {
 	private long[][] matriz = new long[lin][col];
 	private long[][] matrizC = new long[lin][col];
 
-	// MD5
-	public byte[] getFileBytes(File file) {
-		int len = (int) file.length();
-		byte[] sendBuf = new byte[len];
-		FileInputStream inFile = null;
-
-		try {
-			inFile = new FileInputStream(file);
-			inFile.read(sendBuf, 0, len);
-		} catch (Exception e) {
-			System.err.print("\n\tErro: " + e.getMessage());
-			System.exit(1);
-		}
-
-		return sendBuf;
-	}
-
-	// Converte Hexadecimal
-	public String toHexFormat(final byte[] bytes) {
-		final StringBuilder sb = new StringBuilder();
-		for (byte b : bytes) {
-			sb.append(String.format("%02x", b));
-		}
-		return sb.toString();
-	}
-
 	public long[][] lerMatriz(String caminhoMatriz) {
 		int l, c;
 		// Realizando a leitura da matriz
@@ -91,6 +65,32 @@ public class LeituraDados {
 			System.err.print("\n\tErro: " + e.getMessage());
 			System.exit(1);
 		}
+	}
+
+	// MD5
+	public byte[] getFileBytes(File file) {
+		int len = (int) file.length();
+		byte[] sendBuf = new byte[len];
+		FileInputStream inFile = null;
+
+		try {
+			inFile = new FileInputStream(file);
+			inFile.read(sendBuf, 0, len);
+		} catch (Exception e) {
+			System.err.print("\n\tErro: " + e.getMessage());
+			System.exit(1);
+		}
+
+		return sendBuf;
+	}
+
+	// Converte Hexadecimal
+	public String toHexFormat(final byte[] bytes) {
+		final StringBuilder sb = new StringBuilder();
+		for (byte b : bytes) {
+			sb.append(String.format("%02x", b));
+		}
+		return sb.toString();
 	}
 
 	// Gera o MD5
