@@ -1,9 +1,7 @@
 package br.edu.ifsc.main;
 
-import java.rmi.Naming;
-
-import br.edu.ifsc.interfaces.ICalculadoraMatrizes;
-import br.edu.ifsc.util.LeituraDados;
+import br.edu.ifsc.util.ConectaServidor;
+import br.edu.ifsc.util.ManipulaMatrizes;
 
 public class Main {
 
@@ -15,27 +13,45 @@ public class Main {
 	private static long[][] matC = new long[lin][col];
 
 	public static void main(String[] args) {
-		LeituraDados ler = new LeituraDados();
+		ManipulaMatrizes manipula = new ManipulaMatrizes();
+		ConectaServidor conecta = new ConectaServidor();
 
-		// Realizando a leitura da matriz A
-		System.out.println("Realizando a leitura da matriz A");
-		matA = ler.lerMatriz("src/br/edu/ifsc/matrizes/matA.txt");
+		/**
+		 * Realiza a leitura das matrizes A e B
+		 */
+		System.out.println("Realizando a leitura da matriz A...");
+		matA = manipula.lerMatriz("src/br/edu/ifsc/matrizes/matA.txt");
 
-		System.out.println("Realizando a leitura da matriz B");
-		// Realizando a leitura da matriz B
-		matB = ler.lerMatriz("src/br/edu/ifsc/matrizes/matB.txt");
-		
-		long[][] matrizQuebrada = new long[1024][4096];
-		
+		System.out.println("Realizando a leitura da matriz B...");
+		matB = manipula.lerMatriz("src/br/edu/ifsc/matrizes/matB.txt");
+
+		/**
+		 * Realiza a divisão da matriz A em quatro partes
+		 */
+		System.out.println("Realizando a divisão da matriz A em quatro partes...");
+		long[][] matrizA1 = manipula.dividirMatriz(matA, 0, 1024);
+		long[][] matrizA2 = manipula.dividirMatriz(matA, 1024, 2048);
+		long[][] matrizA3 = manipula.dividirMatriz(matA, 2048, 3072);
+		long[][] matrizA4 = manipula.dividirMatriz(matA, 3072, 4096);
+
 		System.out.println("Iniciando Calculadora Client...");
-		try {
-			ICalculadoraMatrizes calc = (ICalculadoraMatrizes)Naming.lookup("rmi://localhost:1099/Calculadora");
-			System.out.println("\tExecutando ADD(2,2): "+calc.mult(matrizQuebrada, matB));
-		
-		} catch (Exception e) {
-			System.err.println("\tErro: "+e.getMessage());
-			System.exit(1);
-		}
+
+		/**
+		 * Chama o servidor que fará a multiplicação de uma das partes da matriz
+		 */
+		System.out.println("Realizando a multiplicaçao da 1º parte da matriz");
+		matrizA1 = conecta.conectar("caminho", matrizA1, matB);
+
+		System.out.println("Realizando a multiplicaçao da 2º parte da matriz");
+		matrizA2 = conecta.conectar("caminho", matrizA2, matB);
+
+		System.out.println("Realizando a multiplicaçao da 3º parte da matriz");
+		matrizA3 = conecta.conectar("caminho", matrizA3, matB);
+
+		System.out.println("Realizando a multiplicaçao da 4º parte da matriz");
+		matrizA4 = conecta.conectar("caminho", matrizA4, matB);
+
+		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
 
 	}
 
