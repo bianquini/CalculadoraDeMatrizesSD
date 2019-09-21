@@ -16,17 +16,22 @@ public class CalculadoraMatrizesServidor extends UnicastRemoteObject implements 
 	public CalculadoraMatrizesServidor() throws RemoteException {
     }
 
-    @Override
-    public long[] multiplica(long[] linha, long[][] matB) {
 
-        long[] result = new long[4096];
-        for (int i = 0; i < linha.length; i++) {
-            for (int j = 0; j < matB.length; j++) {
-                for (int k = 0; k < matB.length; k++) {
-                    result[i] += linha[i] * matB[k][j];
+	@Override
+	public long[][] multiplica(long[][] fragA, long[][] matrizB) throws RemoteException {
+		
+        long[][] result = new long[4096][];
+        for (int i = 0; i < fragA.length; i++) {
+            for (int j = 0; j < matrizB.length; j++) {
+                for (int k = 0; k < matrizB.length; k++) {
+                    result[i][j] += fragA[i][k] * matrizB[k][j];
                 }
             }
         }
         return result;
-    }
+	}
+
+
+
+
 }
