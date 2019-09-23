@@ -1,6 +1,7 @@
 package br.edu.ifsc.main;
 
 import br.edu.ifsc.util.ConectaServidor;
+import br.edu.ifsc.util.MD5;
 import br.edu.ifsc.util.ManipulaMatrizes;
 
 public class Main {
@@ -15,6 +16,7 @@ public class Main {
 	public static void main(String[] args) {
 		ManipulaMatrizes manipula = new ManipulaMatrizes();
 		ConectaServidor conecta = new ConectaServidor();
+		MD5 md5 = new MD5();
 
 		/**
 		 * Realiza a leitura das matrizes A e B
@@ -40,9 +42,9 @@ public class Main {
 		 * Chama o servidor que fará a multiplicação de uma das partes da matriz
 		 */
 		System.out.println("Realizando a multiplicaçao da 1º parte da matriz");
-		matrizA1 = conecta.conectar("caminho", matrizA1, matB);
+		matrizA1 = conecta.conectar("192.", matrizA1, matB);
 
-		System.out.println("Realizando a multiplicaçao da 2º parte da matriz");
+		/*System.out.println("Realizando a multiplicaçao da 2º parte da matriz");
 		matrizA2 = conecta.conectar("caminho", matrizA2, matB);
 
 		System.out.println("Realizando a multiplicaçao da 3º parte da matriz");
@@ -52,6 +54,19 @@ public class Main {
 		matrizA4 = conecta.conectar("caminho", matrizA4, matB);
 
 		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
+		
+		/**
+		 * Gravando a matriz C no arquivo matC.txt
+		 
+		System.out.println("Gravando a matriz C no arquivo matC.txt...");
+		manipula.gravarMatriz("src/br/edu/ifsc/matrizes/matC.txt", matC);
+		
+		/**
+		 * Gerando o arquivo MD5
+		 
+		System.out.println("Gerando o arquivo MD5");
+		md5.gerarMD5();
+		*/
 
 	}
 

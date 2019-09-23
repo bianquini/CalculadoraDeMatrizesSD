@@ -13,6 +13,8 @@ import br.edu.ifsc.interfaces.ICalculadoraMatrizes;
 
 public class ConectaServidor {
 
+	private long[][] matriz = new long[1046][4096];
+
 	/**
 	 * 
 	 * Realiza a conexão com o servidor para realizar a multiplicação das matrizes
@@ -26,15 +28,20 @@ public class ConectaServidor {
 	 * 
 	 */
 	public long[][] conectar(String caminho, long[][] matrizQuebrada, long[][] matB) {
-		long[][] matriz = new long[1046][4096];
-		try {
-			ICalculadoraMatrizes calc = (ICalculadoraMatrizes) Naming.lookup(caminho);
-			matriz = calc.mult(matrizQuebrada, matB);
-			return matriz;
-		} catch (Exception e) {
-			System.err.println("\tErro: " + e.getMessage());
-			System.exit(1);
-		}
+		new Thread() {
+			@Override
+			public void run() {
+				try {
+					ICalculadoraMatrizes calc = (ICalculadoraMatrizes) Naming.lookup(caminho);
+					matriz = calc.mult(matrizQuebrada, matB);
+					// return matriz;
+				} catch (Exception e) {
+					System.err.println("\tErro: " + e.getMessage());
+					System.exit(1);
+				}
+				// return matriz;
+			}
+		}.start();
 		return matriz;
 	}
 
