@@ -5,5 +5,5 @@ import java.rmi.RemoteException;
 
 public interface ICalculadoraMatrizes extends Remote {
 
-	public long[][] multiplica(long[][] fragA, long[][] matrizB) throws RemoteException;
+	public long[][] mult(long[][] fragA, long[][] matrizB) throws RemoteException;
 }
