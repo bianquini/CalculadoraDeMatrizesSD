@@ -28,9 +28,9 @@ public class Main {
 		matB = manipula.lerMatriz("src/br/edu/ifsc/matrizes/matB.txt");
 
 		/**
-		 * Realiza a divisão da matriz A em quatro partes
+		 * Realiza a divisï¿½o da matriz A em quatro partes
 		 */
-		System.out.println("Realizando a divisão da matriz A em quatro partes...");
+		System.out.println("Realizando a divisï¿½o da matriz A em quatro partes...");
 		long[][] matrizA1 = manipula.dividirMatriz(matA, 0, 1024);
 		long[][] matrizA2 = manipula.dividirMatriz(matA, 1024, 2048);
 		long[][] matrizA3 = manipula.dividirMatriz(matA, 2048, 3072);
@@ -39,18 +39,18 @@ public class Main {
 		System.out.println("Iniciando Calculadora Client...");
 
 		/**
-		 * Chama o servidor que fará a multiplicação de uma das partes da matriz
+		 * Chama o servidor que farï¿½ a multiplicaï¿½ï¿½o de uma das partes da matriz
 		 */
-		System.out.println("Realizando a multiplicaçao da 1º parte da matriz");
-		matrizA1 = conecta.conectar("192.", matrizA1, matB);
+		System.out.println("Realizando a multiplicaï¿½ao da 1ï¿½ parte da matriz");
+		matrizA1 = conecta.conectar("rmi://10.151.33.80:3001/Calculadora", matrizA1, matB);
 
-		/*System.out.println("Realizando a multiplicaçao da 2º parte da matriz");
+		/*System.out.println("Realizando a multiplicaï¿½ao da 2ï¿½ parte da matriz");
 		matrizA2 = conecta.conectar("caminho", matrizA2, matB);
 
-		System.out.println("Realizando a multiplicaçao da 3º parte da matriz");
+		System.out.println("Realizando a multiplicaï¿½ao da 3ï¿½ parte da matriz");
 		matrizA3 = conecta.conectar("caminho", matrizA3, matB);
 
-		System.out.println("Realizando a multiplicaçao da 4º parte da matriz");
+		System.out.println("Realizando a multiplicaï¿½ao da 4ï¿½ parte da matriz");
 		matrizA4 = conecta.conectar("caminho", matrizA4, matB);
 
 		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
