@@ -1,6 +1,7 @@
 package br.edu.ifsc.util;
 
 import java.rmi.Naming;
+import java.util.ArrayList;
 
 import br.edu.ifsc.interfaces.ICalculadoraMatrizes;
 
@@ -14,6 +15,8 @@ import br.edu.ifsc.interfaces.ICalculadoraMatrizes;
 public class ConectaServidor {
 
 	private long[][] matriz = new long[1046][4096];
+
+	private ArrayList<String> fila;
 
 	/**
 	 * 
@@ -32,10 +35,12 @@ public class ConectaServidor {
 			@Override
 			public void run() {
 				try {
+					fila.add(caminho);
 					ICalculadoraMatrizes calc;
 					System.setSecurityManager(new SecurityManager());
 					calc = (ICalculadoraMatrizes) Naming.lookup(caminho);
 					matriz = calc.mult(matrizQuebrada, matB);
+					fila.remove(caminho);
 					// return matriz;
 				} catch (Exception e) {
 					System.err.println("\tErro no Servidor: " + e.getMessage());
@@ -45,6 +50,14 @@ public class ConectaServidor {
 			}
 		}.start();
 		return matriz;
+	}
+
+	public ArrayList<String> getFila() {
+		return fila;
+	}
+
+	public void setFila(ArrayList<String> fila) {
+		this.fila = fila;
 	}
 
 }

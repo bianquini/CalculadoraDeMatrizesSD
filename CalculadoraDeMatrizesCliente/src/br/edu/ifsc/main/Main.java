@@ -44,7 +44,7 @@ public class Main {
 		System.out.println("Realizando a multiplica�ao da 1� parte da matriz");
 		matrizA1 = conecta.conectar("rmi://10.151.33.80:3001/Calculadora", matrizA1, matB);
 
-		/*System.out.println("Realizando a multiplica�ao da 2� parte da matriz");
+		System.out.println("Realizando a multiplica�ao da 2� parte da matriz");
 		matrizA2 = conecta.conectar("caminho", matrizA2, matB);
 
 		System.out.println("Realizando a multiplica�ao da 3� parte da matriz");
@@ -53,20 +53,27 @@ public class Main {
 		System.out.println("Realizando a multiplica�ao da 4� parte da matriz");
 		matrizA4 = conecta.conectar("caminho", matrizA4, matB);
 
+		System.out.println("Aguardando respostas...");
+		while (conecta.getFila().size() != 0) {
+
+		}
+
+		System.out.println("Unindo matrizes....");
 		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
-		
+
 		/**
 		 * Gravando a matriz C no arquivo matC.txt
-		 
+		 */
+
 		System.out.println("Gravando a matriz C no arquivo matC.txt...");
 		manipula.gravarMatriz("src/br/edu/ifsc/matrizes/matC.txt", matC);
-		
+
 		/**
 		 * Gerando o arquivo MD5
-		 
+		 */
+
 		System.out.println("Gerando o arquivo MD5");
 		md5.gerarMD5();
-		*/
 
 	}
 
