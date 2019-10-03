@@ -18,6 +18,13 @@ public class ConectaServidor {
 
 	private ArrayList<String> fila;
 
+	
+	
+
+	public ConectaServidor() {
+		fila = new ArrayList<>();
+	}
+
 	/**
 	 * 
 	 * Realiza a conex�o com o servidor para realizar a multiplica��o das matrizes
@@ -31,11 +38,12 @@ public class ConectaServidor {
 	 * 
 	 */
 	public long[][] conectar(String caminho, long[][] matrizQuebrada, long[][] matB) {
+		fila.add(caminho);
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-					fila.add(caminho);
+					System.out.println("tamanho: " + fila.size());
 					ICalculadoraMatrizes calc;
 					System.setSecurityManager(new SecurityManager());
 					calc = (ICalculadoraMatrizes) Naming.lookup(caminho);
@@ -43,12 +51,13 @@ public class ConectaServidor {
 					fila.remove(caminho);
 					// return matriz;
 				} catch (Exception e) {
-					System.err.println("\tErro no Servidor: " + e.getMessage());
+					System.err.println("\tErro ao conectar com o Servidor: " + e.getMessage());
 					System.exit(1);
 				}
 				// return matriz;
 			}
 		}.start();
+
 		return matriz;
 	}
 
