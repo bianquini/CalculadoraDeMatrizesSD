@@ -41,25 +41,22 @@ public class Main {
 		/**
 		 * Chama o servidor que far� a multiplica��o de uma das partes da matriz
 		 */
-		System.out.println("Realizando a multiplica�ao da 1� parte da matriz");
+		System.out.println("Realizando a multiplica�ao da 1� parte da matriz - Iago");
 		matrizA1 = conecta.conectar("rmi://10.151.33.80:1099/Calculadora", matrizA1, matB);
 
-		/*
-		 * System.out.println("Realizando a multiplica�ao da 2� parte da matriz");
-		 * matrizA2 = conecta.conectar("caminho", matrizA2, matB);
-		 * 
-		 * System.out.println("Realizando a multiplica�ao da 3� parte da matriz");
-		 * matrizA3 = conecta.conectar("caminho", matrizA3, matB);
-		 * 
-		 * System.out.println("Realizando a multiplica�ao da 4� parte da matriz");
-		 * matrizA4 = conecta.conectar("caminho", matrizA4, matB);
-		 */
+		System.out.println("Realizando a multiplica�ao da 2� parte da matriz - Localhost");
+		matrizA2 = conecta.conectar("rmi://localhost:1099/Calculadora", matrizA2, matB);
+
+		System.out.println("Realizando a multiplica�ao da 3� parte da matriz - Osmar");
+		matrizA3 = conecta.conectar("rmi://10.151.33.134:1099/Calculadora", matrizA3, matB);
+
+		System.out.println("Realizando a multiplica�ao da 4� parte da matriz - Adriel");
+		matrizA4 = conecta.conectar("rmi://10.151.33.162:1099/Calculadora", matrizA4, matB);
 
 		System.out.println("Aguardando respostas...");
 		while (conecta.getFila().size() != 0) {
-			System.out.println("Aguardando");
+		
 		}
-		System.out.println("Tamanho da fila: " + conecta.getFila().size());
 		System.out.println("Unindo matrizes....");
 		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
 
