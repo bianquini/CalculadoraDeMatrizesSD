@@ -41,6 +41,7 @@ public class Main {
 		/**
 		 * Chama o servidor que fará a multiplicação de uma das partes da matriz
 		 */
+
 		System.out.println("Realizando a multiplicação da 1ª parte da matriz");
 		matrizA1 = conecta.conectar("rmi://10.151.33.80:1099/Calculadora", matrizA1, matB);
 
@@ -57,7 +58,7 @@ public class Main {
 		while (conecta.getFila().size() != 0) {
 			System.out.println("Processando");
 		}
-
+		
 		System.out.println("Unindo matrizes....");
 		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
 

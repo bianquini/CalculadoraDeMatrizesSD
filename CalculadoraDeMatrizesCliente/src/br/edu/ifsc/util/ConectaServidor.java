@@ -36,23 +36,22 @@ public class ConectaServidor {
 	 */
 	public long[][] conectar(String caminho, long[][] matrizQuebrada, long[][] matB) {
 		fila.add(caminho);
-		System.out.println("Tamanho da Fila - Add: " + fila.size());
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-
 					ICalculadoraMatrizes calc;
 					calc = (ICalculadoraMatrizes) Naming.lookup(caminho);
 					matriz = calc.mult(matrizQuebrada, matB);
 					fila.remove(caminho);
 					System.out.println("Tamanho da Fila - Remove: " + fila.size());
 				} catch (Exception e) {
-					System.err.println("\tErro no Servidor: " + e.getMessage());
+					System.err.println("\tErro ao conectar com o Servidor: " + e.getMessage());
 					System.exit(1);
 				}
 			}
 		}.start();
+
 		return matriz;
 	}
 
