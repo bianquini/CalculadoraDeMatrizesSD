@@ -125,16 +125,29 @@ public class ManipulaMatrizes {
 	 */
 	public long[][] unirMatriz(long[][] matrizA1, long[][] matrizA2, long[][] matrizA3, long[][] matrizA4) {
 		long[][] matC = new long[4096][4096];
+		int l2 = 0, c2 = 0;
+		int l3 = 0, c3 = 0;
+		int l4 = 0, c4 = 0;
 		for (int l = 0; l < 4096; l++) {
 			for (int c = 0; c < 4096; c++) {
 				if (l < 1024) {
+					System.out.println("Uniu parte 1");
 					matC[l][c] = matrizA1[l][c];
 				} else if (l < 2048) {
-					matC[l][c] = matrizA2[l][c];
+					System.out.println("Uniu parte 2");
+					matC[l][c] = matrizA2[l2][c2];
+					l2++;
+					c2++;
 				} else if (l < 3072) {
-					matC[l][c] = matrizA3[l][c];
+					System.out.println("Uniu parte 3");
+					matC[l][c] = matrizA3[l3][c3];
+					l3++;
+					c3++;
 				} else {
-					matC[l][c] = matrizA4[l][c];
+					System.out.println("Uniu parte 4");
+					matC[l][c] = matrizA4[l4][c4];
+					l4++;
+					c4++;
 				}
 			}
 		}

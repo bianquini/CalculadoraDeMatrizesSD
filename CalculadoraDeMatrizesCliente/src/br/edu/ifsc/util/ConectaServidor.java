@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import br.edu.ifsc.interfaces.ICalculadoraMatrizes;
 
 /**
- * Realiza a conexï¿½o com o servidor para realizar as multiplicaï¿½ï¿½es
+ * Realiza a conexão com o servidor para realizar as multiplicações
  * 
  * @author Tiago
  *
@@ -18,35 +18,39 @@ public class ConectaServidor {
 
 	private ArrayList<String> fila;
 
+	public ConectaServidor() {
+		fila = new ArrayList<>();
+	}
+
 	/**
 	 * 
-	 * Realiza a conexï¿½o com o servidor para realizar a multiplicaï¿½ï¿½o das matrizes
+	 * Realiza a conexão com o servidor para realizar a multiplicação das matrizes
 	 * 
-	 * @param caminho        - Caminho de onde estï¿½ localizado o servidor
+	 * @param caminho        - Caminho de onde estará localizado o servidor
 	 * @param matrizQuebrada - Matriz contendo uma parte da matriz A
-	 * @param matB           - Matriz B que serï¿½ multiplicada
+	 * @param matB           - Matriz B que será multiplicada
 	 * 
 	 * @return matriz multiplicada com tamanho 1056x4096
-	 * @throws Exceï¿½ï¿½o no caso de erro na multiplicaï¿½ï¿½o da matriz
+	 * @throws Exceção no caso de erro na multiplicação da matriz
 	 * 
 	 */
 	public long[][] conectar(String caminho, long[][] matrizQuebrada, long[][] matB) {
+		fila.add(caminho);
+		System.out.println("Tamanho da Fila - Add: " + fila.size());
 		new Thread() {
 			@Override
 			public void run() {
 				try {
-					fila.add(caminho);
+
 					ICalculadoraMatrizes calc;
-					System.setSecurityManager(new SecurityManager());
 					calc = (ICalculadoraMatrizes) Naming.lookup(caminho);
 					matriz = calc.mult(matrizQuebrada, matB);
 					fila.remove(caminho);
-					// return matriz;
+					System.out.println("Tamanho da Fila - Remove: " + fila.size());
 				} catch (Exception e) {
 					System.err.println("\tErro no Servidor: " + e.getMessage());
 					System.exit(1);
 				}
-				// return matriz;
 			}
 		}.start();
 		return matriz;
