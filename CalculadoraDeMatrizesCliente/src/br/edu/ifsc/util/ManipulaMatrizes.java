@@ -18,7 +18,7 @@ public class ManipulaMatrizes {
 	private int lin = 4096;
 	private int col = 4096;
 
-	private long[][] matriz = new long[lin][col];
+	private long[][] matriz;
 
 	/**
 	 * 
@@ -33,12 +33,14 @@ public class ManipulaMatrizes {
 	 * 
 	 */
 	public long[][] lerMatriz(String caminhoMatriz) {
+		matriz = new long[lin][col];
 		int l, c;
 		try {
 			FileReader file = new FileReader(caminhoMatriz);
 			BufferedReader bufFile = new BufferedReader(file);
 			String line = bufFile.readLine();
-			l = c = 0;
+			l = 0;
+			c = 0;
 			while (line != null) {
 				matriz[l][c] = Integer.parseInt(line);
 				c++;
@@ -72,10 +74,10 @@ public class ManipulaMatrizes {
 		try {
 			File fOut = new File(caminhoMatriz);
 			BufferedWriter writer = new BufferedWriter(new FileWriter(fOut));
-			for (int i = 0; i < lin; i++) {
-				for (int j = 0; j < col; j++) {
-					writer.write(String.valueOf(mat[i][j]));
-					if (!((i == lin - 1) && (j == col - 1))) {
+			for (int l = 0; l < lin; l++) {
+				for (int c = 0; c < col; c++) {
+					writer.write(String.valueOf(mat[l][c]));
+					if (!((l == lin - 1) && (c == col - 1))) {
 						writer.newLine();
 					}
 				}
@@ -125,32 +127,39 @@ public class ManipulaMatrizes {
 	 */
 	public long[][] unirMatriz(long[][] matrizA1, long[][] matrizA2, long[][] matrizA3, long[][] matrizA4) {
 		long[][] matC = new long[4096][4096];
+
 		int l2 = 0, c2 = 0;
 		int l3 = 0, c3 = 0;
 		int l4 = 0, c4 = 0;
 		for (int l = 0; l < 4096; l++) {
 			for (int c = 0; c < 4096; c++) {
 				if (l < 1024) {
-					System.out.println("Uniu parte 1");
 					matC[l][c] = matrizA1[l][c];
 				} else if (l < 2048) {
-					System.out.println("Uniu parte 2");
 					matC[l][c] = matrizA2[l2][c2];
-					l2++;
 					c2++;
+					if (c2 > 4095) {
+						l2++;
+						c2 = 0;
+					}
 				} else if (l < 3072) {
-					System.out.println("Uniu parte 3");
 					matC[l][c] = matrizA3[l3][c3];
-					l3++;
 					c3++;
+					if (c3 > 4095) {
+						l3++;
+						c3 = 0;
+					}
 				} else {
-					System.out.println("Uniu parte 4");
 					matC[l][c] = matrizA4[l4][c4];
-					l4++;
 					c4++;
+					if (c4 > 4095) {
+						l4++;
+						c4 = 0;
+					}
 				}
 			}
 		}
+
 		return matC;
 	}
 }

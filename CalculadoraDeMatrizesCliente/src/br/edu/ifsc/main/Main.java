@@ -31,10 +31,10 @@ public class Main {
 		 * Realiza a divisão da matriz A em quatro partes
 		 */
 		System.out.println("Realizando a divisão da matriz A em quatro partes...");
-		long[][] matrizA1 = manipula.dividirMatriz(matA, 0, 1023);
-		long[][] matrizA2 = manipula.dividirMatriz(matA, 1024, 2047);
-		long[][] matrizA3 = manipula.dividirMatriz(matA, 2048, 3071);
-		long[][] matrizA4 = manipula.dividirMatriz(matA, 3072, 4095);
+		long[][] matrizA1 = manipula.dividirMatriz(matA, 0, 1024);
+		long[][] matrizA2 = manipula.dividirMatriz(matA, 1024, 2048);
+		long[][] matrizA3 = manipula.dividirMatriz(matA, 2048, 3072);
+		long[][] matrizA4 = manipula.dividirMatriz(matA, 3072, 4096);
 
 		System.out.println("Iniciando Calculadora Cliente...");
 
@@ -58,7 +58,7 @@ public class Main {
 		while (conecta.getFila().size() != 0) {
 			System.out.println("Processando");
 		}
-		
+
 		System.out.println("Unindo matrizes....");
 		matC = manipula.unirMatriz(matrizA1, matrizA2, matrizA3, matrizA4);
 
@@ -67,12 +67,11 @@ public class Main {
 		 */
 
 		System.out.println("Gravando a matriz C no arquivo matC.txt...");
-		manipula.gravarMatriz("src/br/edu/ifsc/matrizes/matC.txt", matC);
+		manipula.gravarMatriz("src/br/edu/ifsc/matrizes/matC.txt", matA);
 
 		/**
 		 * Gerando o arquivo MD5
 		 */
-
 		System.out.println("Gerando o arquivo MD5");
 		md5.gerarMD5();
 

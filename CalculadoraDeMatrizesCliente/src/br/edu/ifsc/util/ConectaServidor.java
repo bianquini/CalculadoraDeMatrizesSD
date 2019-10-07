@@ -14,7 +14,7 @@ import br.edu.ifsc.interfaces.ICalculadoraMatrizes;
 
 public class ConectaServidor {
 
-	private long[][] matriz = new long[1046][4096];
+	private long[][] matriz;
 
 	private ArrayList<String> fila;
 
@@ -35,6 +35,7 @@ public class ConectaServidor {
 	 * 
 	 */
 	public long[][] conectar(String caminho, long[][] matrizQuebrada, long[][] matB) {
+		matriz = new long[1046][4096];
 		fila.add(caminho);
 		new Thread() {
 			@Override
