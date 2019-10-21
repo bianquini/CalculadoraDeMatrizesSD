@@ -23,7 +23,7 @@ public class CalculadoraMatrizesServidor extends UnicastRemoteObject implements 
 		long[][] result = new long[1024][4096];
 		for (int i = 0; i < fragA.length; i++) {
 			for (int j = 0; j < matrizB.length; j++) {
-				for (int k = 0; k < matrizB.length; k++) {
+				for (int k = 0; k < fragA[1].length; k++) {
 					result[i][j] += fragA[i][k] * matrizB[k][j];
 				}
 			}
